@@ -123,6 +123,109 @@ python3 scripts/generate_workflow.py \
 | `--go-version` | Go version for setup-go step | `stable` |
 | `--output` | Output file path | stdout |
 
+## Pre-commit hook
+
+When the user opts in, write this script to `.git/hooks/pre-commit` (and `chmod +x` it). If a pre-commit hook already exists, append the CRAP check as a new section rather than overwriting.
+
+```bash
+#!/usr/bin/env bash
+# CRAP Score pre-commit check
+# Runs tests with coverage and checks CRAP threshold before allowing commit.
+
+set -e
+
+echo "Running CRAP score check..."
+
+# -- Adjust these for the project --
+# TEST_CMD="coverage run -m pytest"
+# COVERAGE_CMD="coverage json -o coverage.json"
+# COVERAGE_FILE="coverage.json"
+# SOURCE_DIRS="src"
+# THRESHOLD=30
+# -----------------------------------
+
+$TEST_CMD
+if [ -n "$COVERAGE_CMD" ]; then
+  $COVERAGE_CMD
+fi
+
+RESULT=$(python3 scripts/crap_score.py $SOURCE_DIRS -c $COVERAGE_FILE -t $THRESHOLD -f json -b .)
+CRAPPY=$(echo "$RESULT" | python3 -c "import sys,json; print(json.load(sys.stdin)['crappy_functions'])")
+
+if [ "$CRAPPY" -gt 0 ]; then
+  echo "$RESULT" | python3 -c "
+import sys, json
+r = json.load(sys.stdin)
+print(f\"CRAP check FAILED: {r['crappy_functions']} function(s) exceed threshold {r['threshold']}\")
+for fn in r['functions']:
+    if fn['crap_score'] > r['threshold']:
+        print(f\"  {fn['crap_score']:>8.1f}  {fn['file']}:{fn['start_line']} {fn['name']}\")
+"
+  exit 1
+fi
+
+echo "CRAP check passed."
+```
+
+When generating the hook, replace the placeholder variables with the actual project values detected in Step 1.
+
+**Alternative: pre-commit framework**
+
+If the project uses the [pre-commit](https://pre-commit.com/) framework (has a `.pre-commit-config.yaml`), add a local hook instead:
+
+```yaml
+- repo: local
+  hooks:
+    - id: crap-check
+      name: CRAP Score Check
+      entry: bash -c 'TEST_CMD && python3 scripts/crap_score.py SOURCE_DIRS -c COVERAGE_FILE -t THRESHOLD -f text -b .'
+      language: system
+      pass_filenames: false
+      stages: [pre-commit]
+```
+
+## .crapignore
+
+The CRAP calculator respects a `.crapignore` file in the project root. Syntax is gitignore-like:
+
+```
+# Directories to skip entirely
+vendor/
+dist/
+build/
+node_modules/
+.venv/
+__pycache__/
+
+# Generated code
+*.gen.go
+*.generated.ts
+src/generated/
+
+# Test fixtures / helpers (not production code)
+testdata/
+fixtures/
+
+# Negate -- include even if matched above
+!vendor/critical_patch.py
+```
+
+Rules:
+- Blank lines and `#` comments are ignored
+- `!` at start negates a previous match (re-includes the file)
+- Patterns without `/` match against filenames and directory names
+- Patterns with `/` match against the full relative path
+- Trailing `/` is stripped (matches both files and directories with that name)
+
+### Language-specific defaults
+
+| Language | Suggested .crapignore entries |
+|----------|------------------------------|
+| Python | `.venv/`, `__pycache__/`, `migrations/`, `*_pb2.py` |
+| Node/JS/TS | `node_modules/`, `dist/`, `build/`, `.next/`, `*.min.js` |
+| Go | `vendor/`, `*_generated.go`, `*.pb.go` |
+| Java | `build/`, `target/`, `*.class` |
+
 ## Suggested .gitignore additions
 
 ```

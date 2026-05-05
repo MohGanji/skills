@@ -60,6 +60,25 @@ After user confirms:
 - [ ] Re-run coverage + CRAP script to verify scores dropped
 - [ ] Present before/after comparison
 
+## .crapignore
+
+The script respects a `.crapignore` file in the project root (same directory as `--base-dir`). Syntax is gitignore-like:
+
+```
+# Ignore generated code
+generated/
+*.gen.go
+
+# Ignore test helpers (not production code)
+testutil/
+*_testutil.py
+
+# But keep this one
+!testutil/important.py
+```
+
+Blank lines and `#` comments are ignored. `!` negates a previous match. Patterns without `/` match against filenames and directory names. Patterns with `/` match against the full relative path.
+
 ## Key rules
 
 - Never refactor without re-running tests to confirm nothing broke
@@ -69,4 +88,4 @@ After user confirms:
 
 ## Script
 
-The bundled `scripts/crap_score.py` handles: cyclomatic complexity (AST for Python, heuristic for JS/TS/Java/Go), coverage parsing (lcov, coverage.py JSON, istanbul JSON, Cobertura XML), and CRAP calculation. See [REFERENCE.md](REFERENCE.md) for details.
+The bundled `scripts/crap_score.py` handles: cyclomatic complexity (AST for Python, heuristic for JS/TS/Java/Go), coverage parsing (lcov, coverage.py JSON, istanbul JSON, Cobertura XML), CRAP calculation, and `.crapignore` filtering. See [REFERENCE.md](REFERENCE.md) for details.

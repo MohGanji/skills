@@ -35,12 +35,18 @@ Use `AskUserQuestion` for each:
 3. **Enforcement mode** -- what happens when threshold is exceeded?
    - **Fail the check** (recommended) -- PR cannot merge
    - **Warn only** -- post a comment but don't block
+4. **Pre-commit hook** -- also run CRAP checks locally before each commit?
+   - **Yes** (recommended) -- catch CRAPpy code before it reaches CI
+   - **No** -- rely on CI only
+   - If yes, generate a git pre-commit hook script (see [REFERENCE.md](REFERENCE.md) for details)
 
 ### Step 3 -- Generate files
 
 - [ ] Run `python3 scripts/generate_workflow.py` with the collected parameters to produce the workflow YAML
 - [ ] Write output to `.github/workflows/crap-check.yml`
 - [ ] Copy `crap_score.py` from the `cut-the-crap` skill into the repo at `scripts/crap_score.py`
+- [ ] If pre-commit hook was requested, write the hook script to `.git/hooks/pre-commit` (or append to existing) and make it executable
+- [ ] If `.crapignore` doesn't exist, ask user if they want one and create it with sensible defaults for their language (e.g. `node_modules/`, `dist/`, `.venv/`, test fixtures)
 - [ ] If `.gitignore` doesn't already ignore coverage artifacts, suggest additions (e.g. `coverage/`, `*.info`, `coverage.json`)
 
 ### Step 4 -- Verify
