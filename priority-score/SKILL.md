@@ -1,10 +1,10 @@
 ---
-name: startup-priorities
+name: priority-score
 description: >
   Score feature priorities using Geoff Ralston's (b*d)/c formula — Breadth,
   Depth, and Cost on 1-5 scales yielding a 1-100 priority score. Use when
   user wants to prioritize features, decide what to build next, rank a backlog,
-  compare initiatives, or mentions "startup priorities".
+  compare initiatives, or mentions "priority score".
 ---
 
 # Startup Priorities
