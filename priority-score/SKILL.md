@@ -21,9 +21,19 @@ Formula: `score = max(1, round(4 * b * d / c))`
 | 25 - 49 | High | 🟠 | Current or next sprint |
 | 50 - 100 | Do it now | 🔴 | Stop what you're doing |
 
+## Modes
+
+- **Autonomous (default):** Score all three variables yourself using the litmus tests below and the context available. Output the one-liner immediately. No user interaction unless you hit uncertainty (see below).
+- **Collaborative:** Walk through each variable with the user one at a time. Enter this mode when:
+  - The user explicitly asks to collaborate, discuss, or decide on the variables
+  - You lack sufficient context to confidently answer a litmus test (e.g. no info on user base size, no way to gauge cost)
+  - Two adjacent levels seem equally valid and the difference would change the band
+
+When entering collaborative mode, explain *which* variable you're uncertain about and why, then use `AskUserQuestion` for that variable only. Return to autonomous for the rest.
+
 ## Input spectrums
 
-Present these tables before scoring. Each level has a **litmus test** — a yes/no question that pins the score and removes ambiguity.
+Each level has a **litmus test** — a yes/no question that pins the score and removes ambiguity.
 
 ### Breadth (b) — reach across current users + validated TAM
 
@@ -59,30 +69,35 @@ Score based on current users **or** TAM expansion — whichever is higher. TAM c
 
 ## Workflow
 
-1. **Present the scales** — print the three spectrum tables above before scoring begins.
-2. **Collect the feature** — ask what to score, or confirm if already named.
-3. **Score each variable** — for Breadth, Depth, Cost (one at a time, never batched):
-   - Show the spectrum
-   - Suggest a level with a one-line rationale **referencing the litmus test**
-   - Use `AskUserQuestion` to let the user confirm or override
-4. **Compute and present** — show the breakdown, then the standard one-liner:
-   ```
-   Breadth: <b> — <label>    Depth: <d> — <label>    Cost: <c> — <label>
+### Autonomous (default)
 
+1. Read the feature/task/goal from context.
+2. Score each variable using the litmus tests. For each, identify which litmus test applies.
+3. If confident on all three, compute and output the one-liner directly:
+   ```
    <emoji> Priority Score: <score>(<band>) - <archetype>: <brief why>
    ```
-   Pick the closest archetype from [REFERENCE.md](REFERENCE.md). If none fits, use a short descriptive label.
-5. **Compare** — after 2+ features, show a ranked list of one-liners:
-   ```
-   🟠 Priority Score: 40(High) - Market opener: 200 co's on waitlist need API, medium build
-   🔵 Priority Score: 12(Low) - Infrastructure tax: faster loads for most users, heavy migration
-   ```
+4. If scoring multiple features, output a ranked list of one-liners.
+
+### Collaborative (on uncertainty or user request)
+
+1. Present the spectrum tables so the user sees the litmus tests.
+2. For each uncertain variable, explain the uncertainty and use `AskUserQuestion`.
+3. Score confident variables autonomously — only ask about the ones you can't pin.
+4. Compute and output the one-liner.
+
+### Showing your work
+
+When outputting the one-liner, always follow it with a brief breakdown so the user can challenge the score:
+```
+<emoji> Priority Score: <score>(<band>) - <archetype>: <brief why>
+    b=<b>(<label>) d=<d>(<label>) c=<c>(<label>)
+```
 
 ## Key rules
 
 - **Early-stage caveat**: pre-PMF, Depth > Breadth. 100 devoted users beat 1000 lukewarm ones. Call this out when presenting results.
 - This is a **thinking tool**, not a replacement for judgment.
-- When uncertain about a variable, suggest the user ask their customers.
-- Never auto-fill all three without user confirmation on each.
+- When uncertain about a variable, ask — don't guess. A wrong score is worse than a slow score.
 
 See [REFERENCE.md](REFERENCE.md) for archetypes, worked examples, and band analysis.
