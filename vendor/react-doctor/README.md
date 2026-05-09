@@ -1,1 +1,0 @@
-packages/react-doctor/README.md

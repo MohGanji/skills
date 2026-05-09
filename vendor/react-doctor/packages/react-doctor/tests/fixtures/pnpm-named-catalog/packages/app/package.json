@@ -1,8 +1,0 @@
-{
-  "name": "app",
-  "private": true,
-  "dependencies": {
-    "react": "catalog:react_v19_current",
-    "react-dom": "catalog:react_v19_current"
-  }
-}

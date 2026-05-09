@@ -1,32 +1,56 @@
 [![skills.sh](https://skills.sh/b/mohganji/skills)](https://skills.sh/mohganji/skills)
 
-This repo contains agent skills I use for work, my personal projects, and openclaw agent.
+# skills
 
-Everyone needs to have their skills repo to make their personal agent setup portable and git-tracked. This is the new dotfiles.
+Agent skills I use for work, personal projects, and the openclaw agent. This is the new dotfiles -- a portable, git-tracked agent setup that follows you across repos.
 
-A lot of these skills come from different places, and you can check out the CREDITS.md for where those come from.
+Internal skills live here. External skills are installed at runtime from their source repos via `npx skills@latest add`. The `bootstrap-agentic-repo` skill orchestrates the full setup.
 
-# Installation
+## Quick Start
 
-`npx skills@latest add mohganji/skills`
+```bash
+npx skills@latest add mohganji/skills
+```
 
-# Skills
+Then run `/bootstrap-agentic-repo` in Claude Code to install external skills and walk through setup.
 
-| Skill | Description | Tags |
-|-------|-------------|------|
-| [cut-the-crap](cut-the-crap/) | Calculate CRAP scores for functions, identify high-risk methods, propose refactoring and test improvements, and implement fixes after user approval. | `code-quality`, `testing`, `refactoring` |
-| [dry](dry/) | Find structural duplicate code (DRY violations) across Python and JS/TS codebases using normalised AST fingerprinting and Jaccard similarity. Reports candidates with scores and refactors after user approval. | `code-quality`, `refactoring`, `duplication` |
-| [design-deliberately](design-deliberately/) | Review and guide UI design toward intentional minimalism where every element earns its place. Applies principles distilled from Vercel, Notion, Figma, Cursor, Anthropic, and tldraw. | `design`, `ui`, `review` |
-| [no-broken-window](no-broken-window/) | Detect, establish, and enforce codebase patterns so one violation doesn't erode the standard. Scans for inconsistencies, proposes rules, and sets up automated enforcement. | `code-quality`, `conventions`, `enforcement` |
-| [setup-crap-check-github-actions](setup-crap-check-github-actions/) | One-time guided setup that adds a GitHub Actions workflow to enforce CRAP score thresholds on PRs. Detects repo language and test framework, generates the workflow YAML. | `ci`, `github-actions`, `code-quality` |
-| [priority-score](priority-score/) | Score feature priorities using Geoff Ralston's (b×d)/c formula — Breadth, Depth, and Cost on 1-5 scales yielding a 1-100 priority score. Outputs a standard one-liner for use in issue trackers and planning docs. | `prioritization`, `planning`, `product` |
+## Bootstrap Skills
 
-# External Skills
+Meta-meta -- one-time environment setup.
 
-Skills brought in from other projects via git subtree. See [CREDITS.md](CREDITS.md) for attribution and how to add more.
+| Skill | Description | Owner | Tags |
+|-------|-------------|-------|------|
+| [bootstrap-agentic-repo](bootstrap-agentic-repo/) | Installs all skills, walks through setup skills. | internal | `bootstrap`, `setup` |
 
-| Source | Skills | Tags |
-|--------|--------|------|
-| [browser-harness](vendor/browser-harness/) | browser-harness | `browser`, `automation` |
-| [mattpocock/skills](vendor/mattpocock-skills/) | caveman, diagnose, grill-me, grill-with-docs, improve-codebase-architecture, prototype, tdd, to-issues, to-prd, triage, write-a-skill, zoom-out | `engineering`, `productivity` |
-| [react-doctor](vendor/react-doctor/) | react-doctor | `react`, `code-quality` |
+## Setup Skills
+
+Meta -- one-time repo setup. Each owns a CLAUDE.md section.
+
+| Skill | Description | Owner | Tags |
+|-------|-------------|-------|------|
+| [setup-caveman-default](setup-caveman-default/) | Sets caveman as default communication style and git rules. | internal | `setup`, `communication` |
+| [setup-crap-check-github-actions](setup-crap-check-github-actions/) | Adds CRAP score CI workflow. | internal | `ci`, `github-actions` |
+| setup-matt-pocock-skills | Configures issue tracker, triage labels, domain docs. | [mattpocock](https://github.com/mattpocock/skills) | `setup`, `workflow` |
+
+## Skills
+
+On-demand, day-to-day.
+
+| Skill | Description | Owner | Tags |
+|-------|-------------|-------|------|
+| [cut-the-crap](cut-the-crap/) | CRAP scores, refactoring, test improvements. | internal | `code-quality`, `testing` |
+| [dry](dry/) | Structural duplicate detection. | internal | `code-quality`, `refactoring` |
+| [design-deliberately](design-deliberately/) | UI design review. | internal | `design`, `ui` |
+| [no-broken-window](no-broken-window/) | Codebase pattern enforcement. | internal | `code-quality`, `conventions` |
+| [priority-score](priority-score/) | Feature prioritization via (b*d)/c. | internal | `prioritization`, `planning` |
+| tdd | Test-driven development. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `testing` |
+| triage | Issue triage state machine. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `workflow` |
+| to-prd | Turn context into a PRD. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `planning` |
+| to-issues | Break plans into tickets. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `planning` |
+| grill-me | Stress-test a plan or design. | [mattpocock](https://github.com/mattpocock/skills) | `productivity` |
+| grill-with-docs | Grill against domain model. | [mattpocock](https://github.com/mattpocock/skills) | `productivity` |
+| caveman | Ultra-compressed communication. | [mattpocock](https://github.com/mattpocock/skills) | `productivity` |
+| write-a-skill | Create new agent skills. | [mattpocock](https://github.com/mattpocock/skills) | `productivity` |
+| improve-codebase-architecture | Refactoring opportunities. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `architecture` |
+| browser-harness | Browser control via CDP. | [Browser Use](https://github.com/browser-use/browser-harness) | `browser`, `automation` |
+| react-doctor | React codebase analysis. | [Million](https://github.com/millionco/react-doctor) | `react`, `code-quality` |
