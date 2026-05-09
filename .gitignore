@@ -1,0 +1,10 @@
+node_modules
+dist
+.turbo
+*.log
+.DS_Store
+.cursor
+review-report.md
+review-*.md
+*.review.md
+*.tgz

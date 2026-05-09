@@ -1,0 +1,9 @@
+# Test fixtures are intentionally bad code samples used as inputs to
+# `runOxlint` integration tests. They contain `debugger;` statements,
+# empty blocks, dead variables, mutated state, and other anti-patterns
+# the linter is expected to catch. Linting them directly with
+# `vp lint` / `oxlint` (and especially `--fix`, which once silently
+# stripped the `debugger;` lines that two `adoptExistingLintConfig`
+# tests assert on) would either flood stderr with thousands of
+# warnings or quietly break the tests.
+*
