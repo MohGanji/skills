@@ -1,0 +1,91 @@
+{
+  "name": "react-doctor",
+  "version": "0.1.4",
+  "description": "Diagnose and fix React codebases for security, performance, correctness, accessibility, bundle-size, and architecture issues",
+  "keywords": [
+    "accessibility",
+    "diagnostics",
+    "knip",
+    "linter",
+    "nextjs",
+    "oxlint",
+    "performance",
+    "react",
+    "react-compiler",
+    "react-native",
+    "security",
+    "tanstack",
+    "typescript"
+  ],
+  "homepage": "https://github.com/millionco/react-doctor#readme",
+  "bugs": {
+    "url": "https://github.com/millionco/react-doctor/issues"
+  },
+  "license": "MIT",
+  "author": "Aiden Bai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/millionco/react-doctor.git",
+    "directory": "packages/react-doctor"
+  },
+  "bin": {
+    "react-doctor": "./bin/react-doctor.js"
+  },
+  "files": [
+    "bin/**",
+    "dist/**/*.js",
+    "dist/**/*.d.ts",
+    "dist/skills/**"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/cli.d.ts",
+      "default": "./dist/cli.js"
+    },
+    "./api": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./oxlint-plugin": {
+      "types": "./dist/react-doctor-plugin.d.ts",
+      "default": "./dist/react-doctor-plugin.js"
+    },
+    "./eslint-plugin": {
+      "types": "./dist/eslint-plugin.d.ts",
+      "default": "./dist/eslint-plugin.js"
+    }
+  },
+  "scripts": {
+    "dev": "vp pack --watch",
+    "build": "node -e \"require('node:fs').rmSync('dist', { recursive: true, force: true })\" && NODE_ENV=production vp pack",
+    "typecheck": "tsc --noEmit",
+    "test": "vp test run"
+  },
+  "dependencies": {
+    "agent-install": "0.0.5",
+    "commander": "^14.0.3",
+    "knip": "^6.10.0",
+    "ora": "^9.4.0",
+    "oxlint": "^1.63.0",
+    "picocolors": "^1.1.1",
+    "prompts": "^2.4.2",
+    "typescript": ">=5.0.4 <7"
+  },
+  "devDependencies": {
+    "@types/prompts": "^2.4.9",
+    "eslint-plugin-react-hooks": "^7.1.1"
+  },
+  "peerDependencies": {
+    "eslint-plugin-react-hooks": "^6 || ^7"
+  },
+  "peerDependenciesMeta": {
+    "eslint-plugin-react-hooks": {
+      "optional": true
+    }
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
