@@ -20,3 +20,12 @@ A lot of these skills come from different places, and you can check out the CRED
 | [no-broken-window](no-broken-window/) | Detect, establish, and enforce codebase patterns so one violation doesn't erode the standard. Scans for inconsistencies, proposes rules, and sets up automated enforcement. | `code-quality`, `conventions`, `enforcement` |
 | [setup-crap-check-github-actions](setup-crap-check-github-actions/) | One-time guided setup that adds a GitHub Actions workflow to enforce CRAP score thresholds on PRs. Detects repo language and test framework, generates the workflow YAML. | `ci`, `github-actions`, `code-quality` |
 | [priority-score](priority-score/) | Score feature priorities using Geoff Ralston's (b×d)/c formula — Breadth, Depth, and Cost on 1-5 scales yielding a 1-100 priority score. Outputs a standard one-liner for use in issue trackers and planning docs. | `prioritization`, `planning`, `product` |
+
+# External Skills
+
+Skills brought in from other projects via git subtree. See [CREDITS.md](CREDITS.md) for attribution and how to add more.
+
+| Source | Skills | Tags |
+|--------|--------|------|
+| [browser-harness](vendor/browser-harness/) | browser-harness | `browser`, `automation` |
+| [mattpocock/skills](vendor/mattpocock-skills/) | caveman, diagnose, grill-me, grill-with-docs, improve-codebase-architecture, prototype, tdd, to-issues, to-prd, triage, write-a-skill, zoom-out | `engineering`, `productivity` |
