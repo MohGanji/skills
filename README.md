@@ -10,12 +10,12 @@ This repo is a curated set of agent skills for Claude Code that I use for work, 
 
 By installing these skills and running [`/bootstrap-agentic-repo`](bootstrap-agentic-repo/), you get:
 
-- **Automated code quality enforcement** via [CRAP score checks](setup-crap-check-github-actions/) in CI and pre-commit hooks, so no high-complexity untested code ships
+- **Automated code quality enforcement** via [CRAP score checks](setup-crap-check/) in CI and pre-commit hooks, so no high-complexity untested code ships
 - **Structural duplication detection** with [`/dry`](dry/) to catch copy-paste debt before it compounds
 - **React performance guardrails** via [`/react-doctor`](https://github.com/millionco/react-doctor) analyzing component patterns and flagging anti-patterns
 - **Codebase pattern enforcement** with [`/no-broken-window`](no-broken-window/) so one violation doesn't erode the standard
 - **Intentional UI design review** through [`/design-deliberately`](design-deliberately/) applying principles from world class products
-- **Test-driven development** with [`/tdd`](https://github.com/mattpocock/skills) running red-green-refactor loops
+- **Test-driven development** with [`/tdd`](https://github.com/mattpocock/skills) running red-green-refactor loops, optionally in isolated [`/sandcastle`](sandcastle/) containers for parallel execution
 - **Structured planning pipeline** -- [`/to-prd`](https://github.com/mattpocock/skills) turns context into PRDs, [`/to-issues`](https://github.com/mattpocock/skills) breaks them into tickets, [`/priority-score`](priority-score/) ranks them by impact
 - **Issue triage workflow** via [`/triage`](https://github.com/mattpocock/skills) with a state machine and labels configured for your tracker
 - **Exhaustive decision-tree exploration** with [`/grill-me`](https://github.com/mattpocock/skills) and [`/grill-with-docs`](https://github.com/mattpocock/skills) to walk down every branch of the decision tree, resolving dependencies between decisions one-by-one until reaching shared understanding
@@ -49,6 +49,7 @@ One-time repo configuration. These run during bootstrap (or standalone) to wire 
 | [setup-crap-check](setup-crap-check/) | Adds CRAP score enforcement via CI and pre-commit hook. | internal | `setup`, `code-quality` |
 | [setup-dry](setup-dry/) | Adds DRY violation detection via CI and pre-commit hook. | internal | `setup`, `code-quality` |
 | [setup-react-doctor](setup-react-doctor/) | Adds React performance analysis via CI and pre-commit hook. | internal | `setup`, `react` |
+| [setup-sandcastle](setup-sandcastle/) | Installs Sandcastle and configures sandbox provider for parallel agent work. | internal | `setup`, `sandboxing` |
 | setup-matt-pocock-skills | Configures issue tracker, triage labels, domain docs. | [mattpocock](https://github.com/mattpocock/skills) | `setup`, `workflow` |
 
 ## Skills
@@ -71,5 +72,6 @@ On-demand capabilities for each iteration in the development lifecycle -- planni
 | caveman | Ultra-compressed communication. | [mattpocock](https://github.com/mattpocock/skills) | `productivity` |
 | write-a-skill | Create new agent skills. | [mattpocock](https://github.com/mattpocock/skills) | `productivity` |
 | improve-codebase-architecture | Refactoring opportunities. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `architecture` |
+| [sandcastle](sandcastle/) | Isolated sandbox environments for parallel agent work. | internal | `sandboxing`, `parallelism` |
 | browser-harness | Browser control via CDP. | [Browser Use](https://github.com/browser-use/browser-harness) | `browser`, `automation` |
 | react-doctor | React codebase analysis. | [Million](https://github.com/millionco/react-doctor) | `react`, `code-quality` |
