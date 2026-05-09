@@ -1,11 +1,11 @@
 ---
-name: setup-crap-check-github-actions
-description: One-time setup skill that adds a GitHub Actions workflow to measure CRAP scores on PRs and branches. Detects repo language and test framework, asks user about triggers and thresholds, generates the workflow YAML and bundles the CRAP calculator script. Use when user wants to add CRAP checks to CI, set up CRAP GitHub Actions, or enforce CRAP thresholds on pull requests.
+name: setup-crap-check
+description: One-time setup skill that adds CRAP score enforcement via GitHub Actions CI and pre-commit hook. Detects repo language and test framework, asks user about thresholds, generates the workflow YAML and hook script. Use when user wants to enforce CRAP score thresholds on their codebase.
 ---
 
-# Setup CRAP Check -- GitHub Actions
+# Setup CRAP Check
 
-One-time guided setup. Adds a CI workflow that calculates CRAP scores and enforces a threshold.
+One-time guided setup. Adds CRAP score enforcement at both CI and pre-commit hook level. Defaults to setting up both -- confirms with user before proceeding.
 
 ## Workflow
 
@@ -23,42 +23,42 @@ Present findings to user for confirmation before proceeding.
 
 Use `AskUserQuestion` for each:
 
-1. **Trigger events** -- when should the CRAP check run?
+1. **Where to enforce** -- default is both, confirm with user:
+   - **Both CI and pre-commit hook** (recommended)
+   - **CI only** -- GitHub Actions workflow
+   - **Pre-commit hook only** -- local enforcement
+2. **CRAP threshold** -- max acceptable score per function
+   - Suggest **30** (the standard threshold from the CRAP paper)
+   - User can raise/lower
+3. **CI enforcement mode** (if CI selected) -- what happens when threshold is exceeded?
+   - **Fail the check** (recommended) -- PR cannot merge
+   - **Warn only** -- post a comment but don't block
+4. **CI trigger events** (if CI selected):
    - `pull_request` targeting main/master (recommended default)
    - `push` to main/master
    - `schedule` (e.g. weekly)
    - `workflow_dispatch` (manual)
    - User can pick multiple
-2. **CRAP threshold** -- max acceptable score per function
-   - Suggest **30** (the standard threshold from the CRAP paper)
-   - User can raise/lower
-3. **Enforcement mode** -- what happens when threshold is exceeded?
-   - **Fail the check** (recommended) -- PR cannot merge
-   - **Warn only** -- post a comment but don't block
-4. **Pre-commit hook** -- also run CRAP checks locally before each commit?
-   - **Yes** (recommended) -- catch CRAPpy code before it reaches CI
-   - **No** -- rely on CI only
-   - If yes, generate a git pre-commit hook script (see [REFERENCE.md](REFERENCE.md) for details)
 
 ### Step 3 -- Generate files
 
-- [ ] Run `python3 scripts/generate_workflow.py` with the collected parameters to produce the workflow YAML
+- [ ] If CI selected: run `python3 scripts/generate_workflow.py` with the collected parameters to produce the workflow YAML
 - [ ] Write output to `.github/workflows/crap-check.yml`
 - [ ] Copy `crap_score.py` from the `cut-the-crap` skill into the repo at `scripts/crap_score.py`
-- [ ] If pre-commit hook was requested, write the hook script to `.git/hooks/pre-commit` (or append to existing) and make it executable
+- [ ] If pre-commit hook selected: write the hook script to `.git/hooks/pre-commit` (or append to existing) and make it executable
 - [ ] If `.crapignore` doesn't exist, ask user if they want one and create it with sensible defaults for their language (e.g. `node_modules/`, `dist/`, `.venv/`, test fixtures)
 - [ ] If `.gitignore` doesn't already ignore coverage artifacts, suggest additions (e.g. `coverage/`, `*.info`, `coverage.json`)
 
 ### Step 4 -- Verify
 
-- [ ] Read back the generated workflow YAML and sanity-check it
+- [ ] Read back generated files and sanity-check them
 - [ ] Confirm test + coverage commands match the detected framework
-- [ ] Show the user the full generated workflow for review
+- [ ] Show the user what was generated for review
 - [ ] Suggest a dry-run: `act` locally or push a test branch
 
 ## Key rules
 
-- Never overwrite an existing workflow file without asking
+- Never overwrite existing workflow files or hooks without asking
 - Always confirm detected test/coverage commands with user before generating
 - The `crap_score.py` committed to the repo must be self-contained (no external deps beyond Python stdlib)
 - If the project uses a monorepo or multiple languages, generate separate jobs per language

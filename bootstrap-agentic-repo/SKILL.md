@@ -40,9 +40,11 @@ Based on the stack detected in Phase 1, interactively offer one-time setup skill
 
 Use `AskUserQuestion` to let the user pick which setup skills to run:
 
-1. **setup-caveman-default** -- Set caveman as default communication style and add git rules
-2. **setup-crap-check-github-actions** -- Add CRAP score CI workflow (if repo has CI)
-3. **setup-matt-pocock-skills** -- Configure issue tracker, triage labels, domain docs (from mattpocock/skills)
+1. **setup-caveman** -- Set caveman as default communication style
+2. **setup-crap-check** -- Add CRAP score enforcement via CI and pre-commit hook
+3. **setup-dry** -- Add DRY violation detection via CI and pre-commit hook
+4. **setup-react-doctor** -- Add React performance analysis via CI and pre-commit hook (if project uses React)
+5. **setup-matt-pocock-skills** -- Configure issue tracker, triage labels, domain docs (from mattpocock/skills)
 
 Run each selected setup skill in order. Wait for each to complete before offering the next.
 

@@ -41,12 +41,14 @@ One-time orchestration. [`/bootstrap-agentic-repo`](bootstrap-agentic-repo/) det
 
 ## Setup Skills (meta)
 
-One-time repo configuration. These run during bootstrap (or standalone) to wire up automated workflows and establish defaults. They add CI pipelines, pre-commit hooks, CLAUDE.md directives, and initialize workflow standards like issue tracking conventions and communication style.
+One-time repo configuration. These run during bootstrap (or standalone) to wire up automated workflows and establish defaults. They add CI pipelines, pre-commit hooks, CLAUDE.md directives, and initialize workflow standards like issue tracking conventions and communication style. Naming convention: `setup-{skill-name}` -- each setup skill corresponds to the on-demand skill it configures enforcement for.
 
 | Skill | Description | Owner | Tags |
 |-------|-------------|-------|------|
-| [setup-caveman-default](setup-caveman-default/) | Sets caveman as default communication style and git safety rules. | internal | `setup`, `communication` |
-| [setup-crap-check-github-actions](setup-crap-check-github-actions/) | Adds CRAP score CI workflow and pre-commit hook. | internal | `ci`, `github-actions` |
+| [setup-caveman](setup-caveman/) | Sets caveman as default communication style. | internal | `setup`, `communication` |
+| [setup-crap-check](setup-crap-check/) | Adds CRAP score enforcement via CI and pre-commit hook. | internal | `setup`, `code-quality` |
+| [setup-dry](setup-dry/) | Adds DRY violation detection via CI and pre-commit hook. | internal | `setup`, `code-quality` |
+| [setup-react-doctor](setup-react-doctor/) | Adds React performance analysis via CI and pre-commit hook. | internal | `setup`, `react` |
 | setup-matt-pocock-skills | Configures issue tracker, triage labels, domain docs. | [mattpocock](https://github.com/mattpocock/skills) | `setup`, `workflow` |
 
 ## Skills
