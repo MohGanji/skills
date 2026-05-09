@@ -6,6 +6,7 @@ This repo includes external skills from other open-source projects, brought in v
 |--------|--------|---------|------|
 | [browser-harness](https://github.com/browser-use/browser-harness) | Browser Use | MIT | `vendor/browser-harness/` |
 | [mattpocock/skills](https://github.com/mattpocock/skills) | Matt Pocock | MIT | `vendor/mattpocock-skills/` |
+| [react-doctor](https://github.com/millionco/react-doctor) | Million | MIT | `vendor/react-doctor/` |
 
 ## Adding an external skill source
 

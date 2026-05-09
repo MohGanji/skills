@@ -29,3 +29,4 @@ Skills brought in from other projects via git subtree. See [CREDITS.md](CREDITS.
 |--------|--------|------|
 | [browser-harness](vendor/browser-harness/) | browser-harness | `browser`, `automation` |
 | [mattpocock/skills](vendor/mattpocock-skills/) | caveman, diagnose, grill-me, grill-with-docs, improve-codebase-architecture, prototype, tdd, to-issues, to-prd, triage, write-a-skill, zoom-out | `engineering`, `productivity` |
+| [react-doctor](vendor/react-doctor/) | react-doctor | `react`, `code-quality` |

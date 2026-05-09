@@ -9,6 +9,7 @@ set -euo pipefail
 declare -A VENDORS=(
   ["browser-harness"]="https://github.com/browser-use/browser-harness main"
   ["mattpocock-skills"]="https://github.com/mattpocock/skills main"
+  ["react-doctor"]="https://github.com/millionco/react-doctor main"
 )
 
 update_vendor() {
