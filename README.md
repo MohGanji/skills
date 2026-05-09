@@ -2,9 +2,26 @@
 
 # skills
 
-Agent skills I use for work, personal projects, and the openclaw agent. This is the new dotfiles -- a portable, git-tracked agent setup that follows you across repos.
+Everyone needs to have their skills repo to make their personal agent setup portable and git-tracked. This is the new dotfiles.
 
-Internal skills live here. External skills are installed at runtime from their source repos via `npx skills@latest add`. The `bootstrap-agentic-repo` skill orchestrates the full setup.
+This repo is a curated set of agent skills for Claude Code that I use for work, personal projects, and the openclaw agent. Install once, bootstrap your repo, and get a development environment with quality controls, workflow standards, and on-demand agent capabilities baked in.
+
+## What you get
+
+By installing these skills and running [`/bootstrap-agentic-repo`](bootstrap-agentic-repo/), you get:
+
+- **Automated code quality enforcement** via [CRAP score checks](setup-crap-check-github-actions/) in CI and pre-commit hooks, so no high-complexity untested code ships
+- **Structural duplication detection** with [`/dry`](dry/) to catch copy-paste debt before it compounds
+- **React performance guardrails** via [`/react-doctor`](https://github.com/millionco/react-doctor) analyzing component patterns and flagging anti-patterns
+- **Codebase pattern enforcement** with [`/no-broken-window`](no-broken-window/) so one violation doesn't erode the standard
+- **Intentional UI design review** through [`/design-deliberately`](design-deliberately/) applying principles from world class products
+- **Test-driven development** with [`/tdd`](https://github.com/mattpocock/skills) running red-green-refactor loops
+- **Structured planning pipeline** -- [`/to-prd`](https://github.com/mattpocock/skills) turns context into PRDs, [`/to-issues`](https://github.com/mattpocock/skills) breaks them into tickets, [`/priority-score`](priority-score/) ranks them by impact
+- **Issue triage workflow** via [`/triage`](https://github.com/mattpocock/skills) with a state machine and labels configured for your tracker
+- **Exhaustive decision-tree exploration** with [`/grill-me`](https://github.com/mattpocock/skills) and [`/grill-with-docs`](https://github.com/mattpocock/skills) to walk down every branch of the decision tree, resolving dependencies between decisions one-by-one until reaching shared understanding
+- **Browser automation** via [`/browser-harness`](https://github.com/browser-use/browser-harness) for CDP-based browser control
+- **Ultra-compressed communication** with [`/caveman`](https://github.com/mattpocock/skills) cutting ~75% token usage as the default style
+
 
 ## Quick Start
 
@@ -14,27 +31,27 @@ npx skills@latest add mohganji/skills
 
 Then run `/bootstrap-agentic-repo` in Claude Code to install external skills and walk through setup.
 
-## Bootstrap Skills
+## Bootstrap Skills (meta-meta)
 
-Meta-meta -- one-time environment setup.
+One-time orchestration. [`/bootstrap-agentic-repo`](bootstrap-agentic-repo/) detects your stack, installs all skill sources (internal + external), walks you through the setup skills interactively, and verifies the result.
 
 | Skill | Description | Owner | Tags |
 |-------|-------------|-------|------|
 | [bootstrap-agentic-repo](bootstrap-agentic-repo/) | Installs all skills, walks through setup skills. | internal | `bootstrap`, `setup` |
 
-## Setup Skills
+## Setup Skills (meta)
 
-Meta -- one-time repo setup. Each owns a CLAUDE.md section.
+One-time repo configuration. These run during bootstrap (or standalone) to wire up automated workflows and establish defaults. They add CI pipelines, pre-commit hooks, CLAUDE.md directives, and initialize workflow standards like issue tracking conventions and communication style.
 
 | Skill | Description | Owner | Tags |
 |-------|-------------|-------|------|
-| [setup-caveman-default](setup-caveman-default/) | Sets caveman as default communication style and git rules. | internal | `setup`, `communication` |
-| [setup-crap-check-github-actions](setup-crap-check-github-actions/) | Adds CRAP score CI workflow. | internal | `ci`, `github-actions` |
+| [setup-caveman-default](setup-caveman-default/) | Sets caveman as default communication style and git safety rules. | internal | `setup`, `communication` |
+| [setup-crap-check-github-actions](setup-crap-check-github-actions/) | Adds CRAP score CI workflow and pre-commit hook. | internal | `ci`, `github-actions` |
 | setup-matt-pocock-skills | Configures issue tracker, triage labels, domain docs. | [mattpocock](https://github.com/mattpocock/skills) | `setup`, `workflow` |
 
 ## Skills
 
-On-demand, day-to-day.
+On-demand capabilities for each iteration in the development lifecycle -- planning, building, reviewing, refactoring, and shipping.
 
 | Skill | Description | Owner | Tags |
 |-------|-------------|-------|------|
