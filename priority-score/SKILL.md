@@ -7,9 +7,9 @@ description: >
   compare initiatives, or mentions "priority score".
 ---
 
-# Startup Priorities
+# Priority Score
 
-Score features with **(Breadth x Depth) / Cost**, scaled to **1 - 100**.
+Rank features, tasks, or initiatives using Geoff Ralston's **(Breadth x Depth) / Cost** formula, scaled to **1 - 100**. Cuts through opinion-driven prioritization by forcing each variable through a concrete litmus test.
 
 Formula: `score = max(1, round(4 * b * d / c))`
 
