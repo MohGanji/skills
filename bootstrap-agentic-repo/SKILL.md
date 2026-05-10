@@ -48,7 +48,6 @@ npx skills@latest add millionco/react-doctor
 - [ ] Run each install command
 - [ ] Report any failures and continue with remaining installs
 - [ ] List all successfully installed skills
-- [ ] Ask user if they want a `remotion-videos/` directory created in the repo root for Remotion projects. If yes, create it with a `.gitkeep`.
 
 ## Phase 3 -- Run setup skills
 
@@ -60,7 +59,8 @@ Use `AskUserQuestion` to let the user pick which setup skills to run:
 2. **setup-crap-check** -- Add CRAP score enforcement via CI and pre-commit hook
 3. **setup-dry** -- Add DRY violation detection via CI and pre-commit hook
 4. **setup-react-doctor** -- Add React performance analysis via CI and pre-commit hook (if project uses React)
-5. **setup-matt-pocock-skills** -- Configure issue tracker, triage labels, domain docs (from mattpocock/skills)
+5. **setup-remotion** -- Scaffold `remotion-videos/` directory and add Remotion conventions to CLAUDE.md
+6. **setup-matt-pocock-skills** -- Configure issue tracker, triage labels, domain docs (from mattpocock/skills)
 
 Run each selected setup skill in order. Wait for each to complete before offering the next.
 

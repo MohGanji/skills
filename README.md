@@ -51,6 +51,7 @@ One-time repo configuration. These run during bootstrap (or standalone) to wire 
 | [setup-dry](setup-dry/) | Adds DRY violation detection via CI and pre-commit hook. | internal | `setup`, `code-quality` |
 | [setup-react-doctor](setup-react-doctor/) | Adds React performance analysis via CI and pre-commit hook. | internal | `setup`, `react` |
 | [setup-sandcastle](setup-sandcastle/) | Installs Sandcastle and configures sandbox provider for parallel agent work. | internal | `setup`, `sandboxing` |
+| [setup-remotion](setup-remotion/) | Scaffolds `remotion-videos/` directory and adds Remotion conventions. | internal | `setup`, `video` |
 | setup-matt-pocock-skills | Configures issue tracker, triage labels, domain docs. | [mattpocock](https://github.com/mattpocock/skills) | `setup`, `workflow` |
 
 ## Skills
