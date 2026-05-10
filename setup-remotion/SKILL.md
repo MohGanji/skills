@@ -1,11 +1,11 @@
 ---
 name: setup-remotion
-description: One-time setup skill that scaffolds the remotion-videos directory and adds Remotion conventions to CLAUDE.md. Establishes the standard that all Remotion video projects live under remotion-videos/ as separate React projects. Use when user wants to set up Remotion video creation or during bootstrap setup.
+description: One-time setup skill that scaffolds the remotion-videos directory with shared design kit and inspirations folder, and adds Remotion conventions to CLAUDE.md. Use when user wants to set up Remotion video creation or during bootstrap setup.
 ---
 
 # Setup Remotion
 
-One-time guided setup. Creates the `remotion-videos/` directory and establishes the convention for how Remotion video projects are organized.
+One-time guided setup. Creates the `remotion-videos/` directory with shared infrastructure and establishes the convention for how Remotion video projects are organized.
 
 ## Workflow
 
@@ -19,30 +19,45 @@ One-time guided setup. Creates the `remotion-videos/` directory and establishes 
 
 Ask user for confirmation, then:
 
-- [ ] Create `remotion-videos/` in the repo root
-- [ ] Add a `.gitkeep` to track the empty directory
-- [ ] Explain the convention: each video is its own Remotion project scaffolded inside this directory
+- [ ] Create the full directory structure:
 
 ```
 remotion-videos/
-  explainer-video/     # npx create-video@latest --yes --blank explainer-video
-  product-demo/        # each is a self-contained React project
-  social-clip/         # with its own package.json, src/, public/
+  shared/              # Shared Remotion design kit
+    .gitkeep
+  inspirations/        # Reference videos, images, styles
+    .gitkeep
+  my-first-video/      # npx create-video@latest --yes --blank my-first-video
 ```
 
-### Step 3 -- Update CLAUDE.md
+**`shared/`** — Reusable React components matching the user's design system: colors, fonts, layouts, transitions, lower-thirds, brand assets. Every video composition imports from here unless the user wants a different style. Populated over time as the user builds videos.
+
+**`inspirations/`** — Videos, images, and style references that the user mentions in chats as examples. Drop reference material here so the agent can see what the user is going for.
+
+### Step 3 -- Optionally populate shared kit
+
+- [ ] Check if the repo already has design assets, brand colors, fonts, or a design system (e.g. `src/styles/`, `tailwind.config`, design tokens, logo files)
+- [ ] If found, ask user if they want to seed `remotion-videos/shared/` with components based on what exists (extract colors, fonts, common layouts)
+- [ ] If the repo is new or empty, skip this step -- the shared kit will be populated as videos are created
+
+### Step 4 -- Update CLAUDE.md
 
 Append to CLAUDE.md:
 
 ```markdown
 ## Remotion Videos
 
-All Remotion video projects live under `remotion-videos/`. Each video is a separate React project scaffolded with `npx create-video@latest --yes --blank <name>`. Always scaffold new videos inside `remotion-videos/`, never at the repo root. Use `/remotion` skill when working on video code.
+All Remotion video projects live under `remotion-videos/`. Structure:
+- `shared/` — Shared design kit (colors, fonts, layouts, components). Every composition imports from here by default.
+- `inspirations/` — Reference material (videos, images, styles) dropped here for context.
+- Each video is a separate React project scaffolded with `npx create-video@latest --yes --blank <name>`.
+
+Always scaffold new videos inside `remotion-videos/`, never at the repo root. Use `/remotion` skill when working on video code.
 ```
 
-### Step 4 -- Verify
+### Step 5 -- Verify
 
-- [ ] Confirm `remotion-videos/` exists
+- [ ] Confirm `remotion-videos/`, `remotion-videos/shared/`, and `remotion-videos/inspirations/` exist
 - [ ] Show the user what was added to CLAUDE.md
 - [ ] Suggest creating their first video: `cd remotion-videos && npx create-video@latest --yes --blank my-first-video`
 
