@@ -35,6 +35,7 @@ npx skills@latest add mohganji/skills
 # External skill sources
 npx skills@latest add mattpocock/skills
 npx skills@latest add browser-use/browser-harness
+npx skills@latest add remotion-dev/remotion
 ```
 
 Only install stack-specific external skills if the stack was detected or confirmed in Phase 1:
@@ -42,14 +43,12 @@ Only install stack-specific external skills if the stack was detected or confirm
 ```bash
 # Only if project uses React
 npx skills@latest add millionco/react-doctor
-
-# Only if project uses Remotion
-npx skills@latest add remotion-dev/remotion
 ```
 
 - [ ] Run each install command
 - [ ] Report any failures and continue with remaining installs
 - [ ] List all successfully installed skills
+- [ ] Ask user if they want a `remotion-videos/` directory created in the repo root for Remotion projects. If yes, create it with a `.gitkeep`.
 
 ## Phase 3 -- Run setup skills
 
