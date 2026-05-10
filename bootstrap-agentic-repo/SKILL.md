@@ -42,6 +42,9 @@ Only install stack-specific external skills if the stack was detected or confirm
 ```bash
 # Only if project uses React
 npx skills@latest add millionco/react-doctor
+
+# Only if project uses Remotion
+npx skills@latest add remotion-dev/remotion
 ```
 
 - [ ] Run each install command

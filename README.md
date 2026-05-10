@@ -19,6 +19,7 @@ By installing these skills and running [`/bootstrap-agentic-repo`](bootstrap-age
 - **Structured planning pipeline** -- [`/to-prd`](https://github.com/mattpocock/skills) turns context into PRDs, [`/to-issues`](https://github.com/mattpocock/skills) breaks them into tickets, [`/priority-score`](priority-score/) ranks them by impact
 - **Issue triage workflow** via [`/triage`](https://github.com/mattpocock/skills) with a state machine and labels configured for your tracker
 - **Exhaustive decision-tree exploration** with [`/grill-me`](https://github.com/mattpocock/skills) and [`/grill-with-docs`](https://github.com/mattpocock/skills) to walk down every branch of the decision tree, resolving dependencies between decisions one-by-one until reaching shared understanding
+- **Programmatic video creation** with [`/remotion`](https://github.com/remotion-dev/remotion) best practices for building video content in React
 - **Browser automation** via [`/browser-harness`](https://github.com/browser-use/browser-harness) for CDP-based browser control
 - **Ultra-compressed communication** with [`/caveman`](https://github.com/mattpocock/skills) cutting ~75% token usage as the default style
 
@@ -74,4 +75,5 @@ On-demand capabilities for each iteration in the development lifecycle -- planni
 | improve-codebase-architecture | Refactoring opportunities. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `architecture` |
 | sandcastle | Isolated sandbox environments for parallel agent work. | [mattpocock](https://github.com/mattpocock/sandcastle) | `sandboxing`, `parallelism` |
 | browser-harness | Browser control via CDP. | [Browser Use](https://github.com/browser-use/browser-harness) | `browser`, `automation` |
+| remotion | Remotion best practices for video creation in React. | [Remotion](https://github.com/remotion-dev/remotion) | `video`, `react` |
 | react-doctor | React codebase analysis. | [Million](https://github.com/millionco/react-doctor) | `react`, `code-quality` |
