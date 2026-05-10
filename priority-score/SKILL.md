@@ -1,15 +1,11 @@
 ---
 name: priority-score
-description: >
-  Score feature priorities using Geoff Ralston's (b*d)/c formula — Breadth,
-  Depth, and Cost on 1-5 scales yielding a 1-100 priority score. Use when
-  user wants to prioritize features, decide what to build next, rank a backlog,
-  compare initiatives, or mentions "priority score".
+description: Score feature priorities using Geoff Ralston's (b*d)/c formula — Breadth, Depth, and Cost on 1-5 scales yielding a 1-100 priority score. Use when user wants to prioritize features, decide what to build next, rank a backlog, compare initiatives, or mentions "priority score".
 ---
 
-# Priority Score
+# Startup Priorities
 
-Rank features, tasks, or initiatives using Geoff Ralston's **(Breadth x Depth) / Cost** formula, scaled to **1 - 100**. Cuts through opinion-driven prioritization by forcing each variable through a concrete litmus test.
+Score features with **(Breadth x Depth) / Cost**, scaled to **1 - 100**.
 
 Formula: `score = max(1, round(4 * b * d / c))`
 
