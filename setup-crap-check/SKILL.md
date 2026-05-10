@@ -19,6 +19,11 @@ One-time guided setup. Adds CRAP score enforcement at both CI and pre-commit hoo
 
 Present findings to user for confirmation before proceeding.
 
+If detection is ambiguous, use `AskUserQuestion` to clarify:
+- If no test framework detected: ask what test runner they use (CRAP scoring requires coverage data -- if there are no tests yet, inform user and offer to set up the hook anyway for when they add tests)
+- If multiple languages detected: ask which to configure CRAP checks for
+- If no source directories are obvious: ask which directories contain production code
+
 ### Step 2 -- Ask user preferences
 
 Use `AskUserQuestion` for each:

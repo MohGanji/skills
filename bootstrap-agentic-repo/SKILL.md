@@ -14,7 +14,15 @@ One-time setup that turns any repo into a fully-equipped agentic workspace. Inst
 - [ ] Check for existing CI setup (`.github/workflows/`, `.gitlab-ci.yml`, etc.)
 - [ ] Check for existing skills (`ls ~/.claude/skills/` or `.skills/`)
 - [ ] Check for existing `CLAUDE.md` and note what's already configured
-- [ ] Summarize findings to user before proceeding
+- [ ] Present findings to user and ask them to confirm or correct
+
+If detection is ambiguous or the repo is barebones (no config files, no clear framework), use `AskUserQuestion` to ask:
+- What language(s) does this project use?
+- What framework(s) if any?
+- What test framework and runner?
+- What CI platform (GitHub Actions, GitLab CI, none)?
+
+Never guess -- always confirm with the user when uncertain.
 
 ## Phase 2 -- Install skills
 
@@ -27,6 +35,12 @@ npx skills@latest add mohganji/skills
 # External skill sources
 npx skills@latest add mattpocock/skills
 npx skills@latest add browser-use/browser-harness
+```
+
+Only install stack-specific external skills if the stack was detected or confirmed in Phase 1:
+
+```bash
+# Only if project uses React
 npx skills@latest add millionco/react-doctor
 ```
 

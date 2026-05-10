@@ -18,6 +18,10 @@ One-time guided setup. Installs Sandcastle and configures an isolated sandbox pr
 
 Present findings to user before proceeding.
 
+If detection is ambiguous, use `AskUserQuestion` to clarify:
+- If no container runtime detected: explain that Docker, Podman, or Firecracker is required, ask which they'd like to install, and link to install docs
+- If the project is not JS/TS: explain Sandcastle is a TS library, ask if they still want to proceed (it can still orchestrate non-JS agent tasks inside containers)
+
 ### Step 2 -- Ask user preferences
 
 Use `AskUserQuestion` for each:
@@ -34,7 +38,7 @@ Use `AskUserQuestion` for each:
 
 ### Step 3 -- Install and configure
 
-- [ ] Install Sandcastle: `npm install sandcastle` (or add to devDependencies)
+- [ ] Install Sandcastle from [mattpocock/sandcastle](https://github.com/mattpocock/sandcastle): `npm install sandcastle` (or add to devDependencies)
 - [ ] Verify the selected container runtime is running and accessible
 - [ ] Create a minimal `sandcastle.config.ts` with the selected provider and branch strategy
 - [ ] Run a smoke test: create a sandbox, run `echo "hello"`, verify output, destroy sandbox

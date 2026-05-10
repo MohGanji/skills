@@ -15,7 +15,7 @@ By installing these skills and running [`/bootstrap-agentic-repo`](bootstrap-age
 - **React performance guardrails** via [`/react-doctor`](https://github.com/millionco/react-doctor) analyzing component patterns and flagging anti-patterns
 - **Codebase pattern enforcement** with [`/no-broken-window`](no-broken-window/) so one violation doesn't erode the standard
 - **Intentional UI design review** through [`/design-deliberately`](design-deliberately/) applying principles from world class products
-- **Test-driven development** with [`/tdd`](https://github.com/mattpocock/skills) running red-green-refactor loops, optionally in isolated [`/sandcastle`](sandcastle/) containers for parallel execution
+- **Test-driven development** with [`/tdd`](https://github.com/mattpocock/skills) running red-green-refactor loops, optionally in isolated [`/sandcastle`](https://github.com/mattpocock/sandcastle) containers for parallel execution
 - **Structured planning pipeline** -- [`/to-prd`](https://github.com/mattpocock/skills) turns context into PRDs, [`/to-issues`](https://github.com/mattpocock/skills) breaks them into tickets, [`/priority-score`](priority-score/) ranks them by impact
 - **Issue triage workflow** via [`/triage`](https://github.com/mattpocock/skills) with a state machine and labels configured for your tracker
 - **Exhaustive decision-tree exploration** with [`/grill-me`](https://github.com/mattpocock/skills) and [`/grill-with-docs`](https://github.com/mattpocock/skills) to walk down every branch of the decision tree, resolving dependencies between decisions one-by-one until reaching shared understanding
@@ -72,6 +72,6 @@ On-demand capabilities for each iteration in the development lifecycle -- planni
 | caveman | Ultra-compressed communication. | [mattpocock](https://github.com/mattpocock/skills) | `productivity` |
 | write-a-skill | Create new agent skills. | [mattpocock](https://github.com/mattpocock/skills) | `productivity` |
 | improve-codebase-architecture | Refactoring opportunities. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `architecture` |
-| [sandcastle](sandcastle/) | Isolated sandbox environments for parallel agent work. | internal | `sandboxing`, `parallelism` |
+| sandcastle | Isolated sandbox environments for parallel agent work. | [mattpocock](https://github.com/mattpocock/sandcastle) | `sandboxing`, `parallelism` |
 | browser-harness | Browser control via CDP. | [Browser Use](https://github.com/browser-use/browser-harness) | `browser`, `automation` |
 | react-doctor | React codebase analysis. | [Million](https://github.com/millionco/react-doctor) | `react`, `code-quality` |

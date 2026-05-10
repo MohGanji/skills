@@ -12,11 +12,14 @@ One-time guided setup. Adds react-doctor analysis at both CI and pre-commit hook
 ### Step 1 -- Detect project setup
 
 - [ ] Confirm the project uses React (check for `react` in `package.json` dependencies)
+- [ ] If no `package.json` but `.tsx`/`.jsx` files exist, ask user to confirm React usage
 - [ ] Identify component directories (e.g. `src/components/`, `app/`, `pages/`)
 - [ ] Check for existing ESLint React rules or other React linting
 - [ ] Check if `.github/workflows/` already exists
 
-Present findings to user for confirmation before proceeding.
+Present findings to user and ask them to confirm or correct. Use `AskUserQuestion` to clarify:
+- If component directories can't be determined: ask where React components live
+- If multiple potential component roots found (e.g. monorepo): ask which to include
 
 ### Step 2 -- Ask user preferences
 

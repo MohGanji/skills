@@ -18,6 +18,11 @@ One-time guided setup. Adds DRY violation detection at both CI and pre-commit ho
 
 Present findings to user for confirmation before proceeding.
 
+If detection is ambiguous, use `AskUserQuestion` to clarify:
+- If language can't be determined: ask what language(s) the project uses
+- If no clear source directories: ask which directories contain production code (vs. config, scripts, etc.)
+- If existing duplication tools found: ask if they want to replace or run alongside
+
 ### Step 2 -- Ask user preferences
 
 Use `AskUserQuestion` for each:
