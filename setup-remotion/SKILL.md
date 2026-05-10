@@ -36,9 +36,9 @@ remotion-videos/
 
 ### Step 3 -- Optionally populate shared kit
 
-- [ ] Check if the repo already has design assets, brand colors, fonts, or a design system (e.g. `src/styles/`, `tailwind.config`, design tokens, logo files)
+- [ ] Check if the repo has frontend UI with design assets, brand colors, fonts, or a design system (e.g. `src/styles/`, `tailwind.config`, design tokens, logo files, component library)
 - [ ] If found, ask user if they want to seed `remotion-videos/shared/` with components based on what exists (extract colors, fonts, common layouts)
-- [ ] If the repo is new or empty, skip this step -- the shared kit will be populated as videos are created
+- [ ] Skip this step entirely if the repo is backend-only, a framework/library, has no UI layer, or is new/empty -- the shared kit will be populated naturally as videos are created
 
 ### Step 4 -- Update CLAUDE.md
 
