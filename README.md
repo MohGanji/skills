@@ -65,6 +65,7 @@ On-demand capabilities for each iteration in the development lifecycle -- planni
 | [design-deliberately](design-deliberately/) | UI design review. | internal | `design`, `ui` |
 | [no-broken-window](no-broken-window/) | Codebase pattern enforcement. | internal | `code-quality`, `conventions` |
 | [priority-score](priority-score/) | Feature prioritization via (b*d)/c. | internal | `prioritization`, `planning` |
+| [hormozi](hormozi/) | Brutally honest marketing copy critique via Alex Hormozi's 13 principles. | internal | `marketing`, `copywriting` |
 | tdd | Test-driven development. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `testing` |
 | triage | Issue triage state machine. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `workflow` |
 | to-prd | Turn context into a PRD. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `planning` |
