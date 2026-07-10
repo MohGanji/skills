@@ -15,6 +15,9 @@ By installing these skills and running [`/bootstrap-agentic-repo`](bootstrap-age
 - **React performance guardrails** via [`/react-doctor`](https://github.com/millionco/react-doctor) analyzing component patterns and flagging anti-patterns
 - **Codebase pattern enforcement** with [`/no-broken-window`](no-broken-window/) so one violation doesn't erode the standard
 - **Intentional UI design review** through [`/design-deliberately`](design-deliberately/) applying principles from world class products
+- **Apple-grade fluid interfaces** with [`/apple-design`](apple-design/) translating Apple's motion, gesture, material, and typography principles to the web
+- **Brand logo design the Gal Shir way** with [`/gal-shir-brand-logo-design`](gal-shir-brand-logo-design/) turning a brand story into a smart, minimal symbol and pixel-perfect SVG lockups via a bundled construction SDK
+- **A collaborative design canvas** with [`/canvas-studio`](canvas-studio/) where you and your local AI co-edit the same live Fabric.js canvas -- the AI screenshots and scripts it while you tweak directly
 - **Test-driven development** with [`/tdd`](https://github.com/mattpocock/skills) running red-green-refactor loops, optionally in isolated [`/sandcastle`](https://github.com/mattpocock/sandcastle) containers for parallel execution
 - **Structured planning pipeline** -- [`/to-prd`](https://github.com/mattpocock/skills) turns context into PRDs, [`/to-issues`](https://github.com/mattpocock/skills) breaks them into tickets, [`/priority-score`](priority-score/) ranks them by impact
 - **Issue triage workflow** via [`/triage`](https://github.com/mattpocock/skills) with a state machine and labels configured for your tracker
