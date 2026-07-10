@@ -67,6 +67,7 @@ On-demand capabilities for each iteration in the development lifecycle -- planni
 | [priority-score](priority-score/) | Feature prioritization via (b*d)/c. | internal | `prioritization`, `planning` |
 | [hormozi](hormozi/) | Brutally honest marketing copy critique via Alex Hormozi's 13 principles. | internal | `marketing`, `copywriting` |
 | [experiment](experiment/) | In-page A/B testing: N live variants behind a floating switcher pill, pick by feel, ship the winner. | internal | `design`, `experimentation` |
+| [apple-design](apple-design/) | Apple's fluid-interface design & motion principles, translated for the web. | [emilkowalski](https://github.com/emilkowalski/skills/tree/main/skills) | `design`, `motion` |
 | tdd | Test-driven development. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `testing` |
 | triage | Issue triage state machine. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `workflow` |
 | to-prd | Turn context into a PRD. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `planning` |
