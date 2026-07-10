@@ -1,0 +1,4 @@
+node_modules/
+.studio/
+package-lock.json
+dist/

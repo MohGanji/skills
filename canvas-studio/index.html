@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Canvas Studio</title>
+    <style>
+      html, body { margin: 0; height: 100%; overflow: hidden; background: #f7f7f4; }
+      #c { display: block; }
+      /* minimal hint bar */
+      #hint { position: fixed; left: 12px; bottom: 10px; font: 12px system-ui, sans-serif;
+              color: #9b9bab; user-select: none; pointer-events: none; }
+    </style>
+  </head>
+  <body>
+    <canvas id="c"></canvas>
+    <div id="hint">Canvas Studio — drag / select / recolor freely. Your AI edits the same canvas.</div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
