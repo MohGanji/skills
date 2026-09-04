@@ -14,6 +14,7 @@ By installing these skills and running [`/bootstrap-agentic-repo`](bootstrap-age
 - **Structural duplication detection** with [`/dry`](dry/) to catch copy-paste debt before it compounds
 - **React performance guardrails** via [`/react-doctor`](https://github.com/millionco/react-doctor) analyzing component patterns and flagging anti-patterns
 - **A review fleet with independent lenses** -- [`/find-critical-bugs`](find-critical-bugs/) proving every finding with a failing test, [`/refactoring-guru`](refactoring-guru/) sweeping 23 code smells into prescribed treatments
+- **Memory that survives the session** with [`/braindump`](braindump/) appending dense one-line facts to topic files, so the next agent greps instead of rediscovering
 - **Codebase pattern enforcement** with [`/no-broken-window`](no-broken-window/) so one violation doesn't erode the standard
 - **Intentional UI design review** through [`/design-deliberately`](design-deliberately/) applying principles from world class products
 - **Apple-grade fluid interfaces** with [`/apple-design`](apple-design/) translating Apple's motion, gesture, material, and typography principles to the web
@@ -69,6 +70,7 @@ On-demand capabilities for each iteration in the development lifecycle -- planni
 | [dry](dry/) | Structural duplicate detection. | internal | `code-quality`, `refactoring` |
 | [design-deliberately](design-deliberately/) | UI design review. | internal | `design`, `ui` |
 | [no-broken-window](no-broken-window/) | Codebase pattern enforcement. | internal | `code-quality`, `conventions` |
+| [braindump](braindump/) | Long-term agent memory — dense one-line facts appended to topic files, grepped back later. | internal | `memory`, `context` |
 | [priority-score](priority-score/) | Feature prioritization via (b*d)/c. | internal | `prioritization`, `planning` |
 | [hormozi](hormozi/) | Brutally honest marketing copy critique via Alex Hormozi's 13 principles. | internal | `marketing`, `copywriting` |
 | [experiment](experiment/) | In-page A/B testing: N live variants behind a floating switcher pill, pick by feel, ship the winner. | internal | `design`, `experimentation` |
