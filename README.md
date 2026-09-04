@@ -13,6 +13,7 @@ By installing these skills and running [`/bootstrap-agentic-repo`](bootstrap-age
 - **Automated code quality enforcement** via [CRAP score checks](setup-crap-check/) in CI and pre-commit hooks, so no high-complexity untested code ships
 - **Structural duplication detection** with [`/dry`](dry/) to catch copy-paste debt before it compounds
 - **React performance guardrails** via [`/react-doctor`](https://github.com/millionco/react-doctor) analyzing component patterns and flagging anti-patterns
+- **A review fleet with independent lenses** -- [`/find-critical-bugs`](find-critical-bugs/) proving every finding with a failing test, [`/refactoring-guru`](refactoring-guru/) sweeping 23 code smells into prescribed treatments
 - **Codebase pattern enforcement** with [`/no-broken-window`](no-broken-window/) so one violation doesn't erode the standard
 - **Intentional UI design review** through [`/design-deliberately`](design-deliberately/) applying principles from world class products
 - **Apple-grade fluid interfaces** with [`/apple-design`](apple-design/) translating Apple's motion, gesture, material, and typography principles to the web
@@ -55,6 +56,7 @@ One-time repo configuration. These run during bootstrap (or standalone) to wire 
 | [setup-react-doctor](setup-react-doctor/) | Adds React performance analysis via CI and pre-commit hook. | internal | `setup`, `react` |
 | [setup-sandcastle](setup-sandcastle/) | Installs Sandcastle and configures sandbox provider for parallel agent work. | internal | `setup`, `sandboxing` |
 | [setup-remotion](setup-remotion/) | Scaffolds `remotion-videos/` directory and adds Remotion conventions. | internal | `setup`, `video` |
+| [provision-automation-environment](provision-automation-environment/) | Provisions the cloud environment an automation fleet runs in — checkout, host CLI auth, tracker access, probes. | internal | `setup`, `automations` |
 | setup-matt-pocock-skills | Configures issue tracker, triage labels, domain docs. | [mattpocock](https://github.com/mattpocock/skills) | `setup`, `workflow` |
 
 ## Skills
@@ -73,6 +75,9 @@ On-demand capabilities for each iteration in the development lifecycle -- planni
 | [apple-design](apple-design/) | Apple's fluid-interface design & motion principles, translated for the web. | [emilkowalski](https://github.com/emilkowalski/skills/tree/main/skills) | `design`, `motion` |
 | [gal-shir-brand-logo-design](gal-shir-brand-logo-design/) | Design brand logos Gal Shir's way — brand story → smart minimal symbol → pixel-perfect vector SVG + lockups, via a bundled construction SDK. | internal | `design`, `branding`, `logo` |
 | [canvas-studio](canvas-studio/) | Local collaborative design canvas (Fabric.js) — you and your AI co-edit the same browser page; pixel-level vector, gradients, textures, layered depth. The AI screenshots the live canvas and scripts the editor. | internal | `design`, `canvas`, `collaboration` |
+| [orchestrate](orchestrate/) | Run the session as an orchestrator — delegate to long-lived subagents, retire them before they hit the dumb zone. | internal | `productivity`, `parallelism` |
+| [find-critical-bugs](find-critical-bugs/) | Deep hunt for high-severity bugs — data loss, races, auth bypasses — each proven by a failing test. | internal | `code-quality`, `review` |
+| [refactoring-guru](refactoring-guru/) | Refactoring review via refactoring.guru — 23-smell sweep, prescribed treatments, patterns only when justified. | internal | `refactoring`, `review` |
 | tdd | Test-driven development. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `testing` |
 | triage | Issue triage state machine. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `workflow` |
 | to-prd | Turn context into a PRD. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `planning` |

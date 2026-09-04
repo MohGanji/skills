@@ -1,0 +1,242 @@
+#!/usr/bin/env python3
+"""Context usage of this session's orchestrator and the threads it has opened.
+
+No harness reports a subagent's context usage — not in the launch result, not in
+the completion notification, not in any listing. They all write transcripts to
+disk, so this reads those.
+
+  claude  Every assistant message in the transcript carries the usage that
+          produced it, so the live context size is the last one's input +
+          cache read + cache creation. The window is recorded nowhere, so it
+          comes from --window, per model; without it a row shows raw context
+          and no percentage rather than a guessed one.
+  cursor  Cursor's transcripts hold no usage, but its IDE state database does:
+          composerData carries contextTokensUsed, contextTokenLimit, the model
+          and the thread's name, so nothing here is estimated or reconstructed.
+
+Requires python3 3.9+ (str.removeprefix), which is the system python on macOS.
+
+Usage:
+  subagent-top ID [ID ...]         only these threads (full agent id or a prefix)
+  subagent-top                     every thread this session has opened
+  subagent-top --window M=N,M=N    each model's window, which claude records nowhere
+  subagent-top -p cursor           force a platform (default: auto-detect)
+  subagent-top --session SESSION   another session (default: CLAUDE_CODE_SESSION_ID,
+                                   falling back to the most recently written)
+"""
+
+import json
+import os
+import re
+import sqlite3
+import sys
+import time
+from pathlib import Path
+
+CURSOR_STATE = [
+    Path.home() / "Library/Application Support/Cursor/User/globalStorage/state.vscdb",
+    Path.home() / ".config/Cursor/User/globalStorage/state.vscdb",
+]
+
+
+LINE = 50
+
+
+def windows(spec: str) -> dict:
+    """Parse --window opus-5=1000000,sonnet-5=1000000 — one window per model, never a blanket."""
+    table = {}
+    for part in spec.split(","):
+        if not part.strip():
+            continue
+        model, sep, size = part.strip().partition("=")
+        if not (sep and model and size.isdigit()):
+            sys.exit(f"--window takes model=size pairs, not {part.strip()!r}")
+        table[model] = int(size)
+    return table
+
+
+def window_for(model: str, table: dict):
+    """A row's context window, or None when the caller gave none for its model."""
+    named = [k for k in table if k in model]
+    return table[max(named, key=len)] if named else None
+
+
+def short(model: str) -> str:
+    for prefix in ("claude-", "cursor-", "anthropic/"):
+        model = model.removeprefix(prefix)
+    return model or "-"
+
+
+def lines(path: Path):
+    with path.open() as f:
+        for line in f:
+            try:
+                yield json.loads(line)
+            except ValueError:
+                continue
+
+
+# --- claude ------------------------------------------------------------------
+
+
+def claude_sessions(session: str):
+    project = Path.home() / ".claude/projects" / re.sub(r"[/.]", "-", os.getcwd())
+    return list(project.glob(f"{session}.jsonl"))
+
+
+def claude_threads(transcript: Path):
+    return sorted((transcript.parent / transcript.stem / "subagents").glob("agent-*.jsonl"))
+
+
+def claude_read(path: Path) -> tuple[int, str, None]:
+    """The live context size — the newest assistant message's input + cache read + creation."""
+    tokens, model = 0, ""
+    for entry in lines(path):
+        if entry.get("type") != "assistant":
+            continue
+        message = entry.get("message") or {}
+        usage = message.get("usage")
+        if usage:
+            tokens = (
+                usage.get("input_tokens", 0)
+                + usage.get("cache_read_input_tokens", 0)
+                + usage.get("cache_creation_input_tokens", 0)
+            ) or tokens
+        model = message.get("model") or model
+    return tokens, model, None
+
+
+def claude_names(transcript: Path) -> dict:
+    """agentId -> the description it was launched with."""
+    found = {}
+    for entry in lines(transcript):
+        result = entry.get("toolUseResult")
+        if isinstance(result, dict) and result.get("agentId"):
+            found[result["agentId"]] = result.get("description", "")
+    return found
+
+
+# --- cursor ------------------------------------------------------------------
+
+
+def cursor_sessions(session: str):
+    project = Path.home() / ".cursor/projects" / re.sub(r"[/.]", "-", os.getcwd()).lstrip("-")
+    return list(project.glob(f"agent-transcripts/{session}/*.jsonl"))
+
+
+def cursor_threads(transcript: Path):
+    return sorted((transcript.parent / "subagents").glob("*.jsonl"))
+
+
+_cursor_db = None
+
+
+def composer_data(thread_id: str) -> dict:
+    """Cursor's own record of a thread — tokens used, the window, the model."""
+    global _cursor_db
+    if _cursor_db is None:
+        path = next((p for p in CURSOR_STATE if p.exists()), None)
+        _cursor_db = sqlite3.connect(f"file:{path}?mode=ro", uri=True) if path else False
+    if not _cursor_db:
+        return {}
+    row = _cursor_db.execute(
+        "select value from cursorDiskKV where key = ?", (f"composerData:{thread_id}",)
+    ).fetchone()
+    return json.loads(row[0]) if row else {}
+
+
+def cursor_read(path: Path):
+    """Usage straight from the IDE state database, which records it directly."""
+    data = composer_data(path.stem)
+    model = (data.get("modelConfig") or {}).get("modelName", "")
+    return data.get("contextTokensUsed"), model, data.get("contextTokenLimit")
+
+
+def cursor_names(transcript: Path) -> dict:
+    return {p.stem: composer_data(p.stem).get("name", "") for p in cursor_threads(transcript)}
+
+
+PLATFORMS = {
+    "claude": (claude_sessions, claude_threads, claude_read, claude_names),
+    "cursor": (cursor_sessions, cursor_threads, cursor_read, cursor_names),
+}
+
+
+def main() -> None:
+    args = sys.argv[1:]
+    # Own session id, so a second session in the same repo cannot be read as self.
+    options = {"--session": os.environ.get("CLAUDE_CODE_SESSION_ID") or "*",
+               "-p": "auto", "--window": ""}
+    for flag in options:
+        if flag in args:
+            at = args.index(flag)
+            options[flag] = args[at + 1]
+            del args[at : at + 2]
+    session, platform = options["--session"], options["-p"]
+    table = windows(options["--window"])
+    wanted = args
+
+    candidates = [platform] if platform != "auto" else list(PLATFORMS)
+    found = [(p, name) for name in candidates for p in PLATFORMS[name][0](session)]
+    if not found:
+        sys.exit(f"no {'/'.join(candidates)} transcript matching '{session}' for {os.getcwd()}")
+    transcript, platform = max(found, key=lambda f: f[0].stat().st_mtime)
+    _, list_threads, read, list_names = PLATFORMS[platform]
+
+    now = time.time()
+    name = list_names(transcript)
+    paths = list_threads(transcript)
+    if wanted:
+        paths = [p for p in paths if any(p.stem.removeprefix("agent-").startswith(w) for w in wanted)]
+
+    threads = []
+    for path in paths:
+        agent_id = path.stem.removeprefix("agent-")
+        tokens, model, window = read(path)
+        threads.append((name.get(agent_id, ""), agent_id, short(model), tokens,
+                        now - path.stat().st_mtime, window))
+    threads.sort(key=lambda row: row[4])
+
+    tokens, model, window = read(transcript)
+    rows = [("self", "", short(model), tokens, now - transcript.stat().st_mtime, window)] + threads
+
+    wide = lambda column, title: max([len(title)] + [len(str(r[column])) for r in rows])
+    names, ids, models = wide(0, "THREAD"), wide(1, "ID"), max(5, wide(2, "MODEL"))
+
+    unknown, body = set(), []
+    for label, agent_id, model, tokens, idle_for, window in rows:
+        window = window or window_for(model, table)
+        if tokens is None:
+            context, percent = "-", ""
+        else:
+            context = f"{tokens // 1000}k"
+            if window:
+                # Round once: the marker has to test the number the column shows.
+                share = round(100 * tokens / window)
+                percent = f"{share:>4d}%{'!' if share >= LINE else ' '}"
+            else:
+                percent = ""
+                if model != "-":
+                    unknown.add(model)
+        age = "now" if idle_for < 90 else (
+            f"{int(idle_for / 60)}m" if idle_for < 3600 else f"{int(idle_for / 3600)}h"
+        )
+        body.append((label, agent_id, model, context, percent, age))
+
+    scored = any(row[4] for row in body)
+    heading = f"{'THREAD':<{names}}  {'ID':<{ids}}  {'MODEL':<{models}} {'CTX':>6} "
+    print(heading + (f"{'%':>5} " if scored else "") + f"{'LAST':>5}")
+    for label, agent_id, model, context, percent, age in body:
+        cells = f"{label:<{names}}  {agent_id:<{ids}}  {model:<{models}} {context:>6} "
+        print(cells + (f"{percent:<6}" if scored else "") + f"{age:>5}")
+
+    if scored:
+        print(f"\n{platform} · ! marks the line at {LINE}% — the dumb zone.")
+    else:
+        print(f"\n{platform}")
+    if unknown:
+        print(f"No window given for {', '.join(sorted(unknown))} — pass --window to get a %.")
+
+
+if __name__ == "__main__":
+    main()
