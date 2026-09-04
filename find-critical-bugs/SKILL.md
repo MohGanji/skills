@@ -86,3 +86,7 @@ Per verified bug:
 - **Fix and validation** (local mode) or **suggested fix** (PR mode)
 
 Close with links to anything created or updated, plus any suspicions that didn't clear the bar.
+
+## Attribution
+
+Adapted from Cursor's bug-hunt automation template ([`cursor/plugins`](https://github.com/cursor/plugins)). The original ships as an automation, not a skill — this is the same method rewritten as one, so any harness can invoke it and an automation can reference it rather than restate it.

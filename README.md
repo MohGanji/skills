@@ -76,7 +76,7 @@ On-demand capabilities for each iteration in the development lifecycle -- planni
 | [gal-shir-brand-logo-design](gal-shir-brand-logo-design/) | Design brand logos Gal Shir's way — brand story → smart minimal symbol → pixel-perfect vector SVG + lockups, via a bundled construction SDK. | internal | `design`, `branding`, `logo` |
 | [canvas-studio](canvas-studio/) | Local collaborative design canvas (Fabric.js) — you and your AI co-edit the same browser page; pixel-level vector, gradients, textures, layered depth. The AI screenshots the live canvas and scripts the editor. | internal | `design`, `canvas`, `collaboration` |
 | [orchestrate](orchestrate/) | Run the session as an orchestrator — delegate to long-lived subagents, retire them before they hit the dumb zone. | internal | `productivity`, `parallelism` |
-| [find-critical-bugs](find-critical-bugs/) | Deep hunt for high-severity bugs — data loss, races, auth bypasses — each proven by a failing test. | internal | `code-quality`, `review` |
+| [find-critical-bugs](find-critical-bugs/) | Deep hunt for high-severity bugs — data loss, races, auth bypasses — each proven by a failing test. | [cursor](https://github.com/cursor/plugins) | `code-quality`, `review` |
 | [refactoring-guru](refactoring-guru/) | Refactoring review via refactoring.guru — 23-smell sweep, prescribed treatments, patterns only when justified. | internal | `refactoring`, `review` |
 | tdd | Test-driven development. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `testing` |
 | triage | Issue triage state machine. | [mattpocock](https://github.com/mattpocock/skills) | `engineering`, `workflow` |
