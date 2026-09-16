@@ -27,6 +27,7 @@ By installing these skills and running [`/bootstrap-agentic-repo`](bootstrap-age
 - **Programmatic video creation** with [`/remotion`](https://github.com/remotion-dev/remotion) best practices for building video content in React
 - **Browser automation** via [`/browser-harness`](https://github.com/browser-use/browser-harness) for CDP-based browser control
 - **Ultra-compressed communication** with [`/caveman`](https://github.com/mattpocock/skills) cutting ~75% token usage as the default style
+- **Answers you look at instead of read** with [`/pictorial`](pictorial/) turning every response into an inline interactive diagram, chart, or widget -- least words, most visual, with a local viewer for the terminal
 
 
 ## Quick Start
@@ -74,6 +75,7 @@ On-demand capabilities for each iteration in the development lifecycle -- planni
 | [priority-score](priority-score/) | Feature prioritization via (b*d)/c. | internal | `prioritization`, `planning` |
 | [hormozi](hormozi/) | Brutally honest marketing copy critique via Alex Hormozi's 13 principles. | internal | `marketing`, `copywriting` |
 | [experiment](experiment/) | In-page A/B testing: N live variants behind a floating switcher pill, pick by feel, ship the winner. | internal | `design`, `experimentation` |
+| [pictorial](pictorial/) | Visual-only communication mode -- every response an inline interactive diagram, chart, or widget; a bare local viewer plays the conversation when the surface can't render inline. | internal | `communication`, `visualization` |
 | [apple-design](apple-design/) | Apple's fluid-interface design & motion principles, translated for the web. | [emilkowalski](https://github.com/emilkowalski/skills/tree/main/skills) | `design`, `motion` |
 | [gal-shir-brand-logo-design](gal-shir-brand-logo-design/) | Design brand logos Gal Shir's way — brand story → smart minimal symbol → pixel-perfect vector SVG + lockups, via a bundled construction SDK. | internal | `design`, `branding`, `logo` |
 | [canvas-studio](canvas-studio/) | Local collaborative design canvas (Fabric.js) — you and your AI co-edit the same browser page; pixel-level vector, gradients, textures, layered depth. The AI screenshots the live canvas and scripts the editor. | internal | `design`, `canvas`, `collaboration` |
